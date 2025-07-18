@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>neonOS Boot</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="terminal-container">
+    <div class="terminal-title">[ boot@neonOS ~ ]</div>
+    <div class="terminal-output">
+      <p id="typewriter"></p>
+      <span class="cursor blink">_</span>
+    </div>
+  </div>
+
+  <script>
+    const lines = [
+      "> booting...",
+      "> verifying user...",
+      "> login accepted.",
+      "> initializing kernel...",
+      "> launching interface........... and nukes..........",
+      "> ;P"
+    ];
+
+    let lineIndex = 0;
+    let charIndex = 0;
+    const output = document.getElementById("typewriter");
+
+    function typeLine() {
+      if (lineIndex >= lines.length) {
+        setTimeout(() => window.location.href = "index.html", 1000);
+        return;
+      }
+
+      const line = lines[lineIndex];
+      if (charIndex < line.length) {
+        output.innerHTML += line.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeLine, 40);
+      } else {
+        output.innerHTML += "<br/>";
+        lineIndex++;
+        charIndex = 0;
+        setTimeout(typeLine, 300);
+      }
+    }
+
+    typeLine();
+  </script>
+</body>
+</html>
